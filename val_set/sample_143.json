@@ -1,0 +1,27 @@
+{
+    "prob_desc_time_limit": "1 second",
+    "prob_desc_sample_outputs": "[\"NO\", \"YES\"]",
+    "src_uid": "43bb8fec6b0636d88ce30f23b61be39f",
+    "prob_desc_notes": "NotePalindrome is a string reading the same forward and backward.In the second sample, the faxes in his back-bag can be \"saddas\" and \"tavvat\".",
+    "prob_desc_description": "While Mike was walking in the subway, all the stuff in his back-bag dropped on the ground. There were several fax messages among them. He concatenated these strings in some order and now he has string s.  He is not sure if this is his own back-bag or someone else's. He remembered that there were exactly k messages in his own bag, each was a palindrome string and all those strings had the same length.He asked you to help him and tell him if he has worn his own back-bag. Check if the given string s is a concatenation of k palindromes of the same length.",
+    "prob_desc_output_spec": "Print \"YES\"(without quotes) if he has worn his own back-bag or \"NO\"(without quotes) otherwise.",
+    "prob_desc_input_spec": "The first line of input contains string s containing lowercase English letters (1 ≤ |s| ≤ 1000). The second line contains integer k (1 ≤ k ≤ 1000).",
+    "prob_desc_output_to": "standard output",
+    "prob_desc_input_from": "standard input",
+    "lang": "Python 2",
+    "lang_cluster": "Python",
+    "difficulty": 1100,
+    "file_name": "train_000.jsonl",
+    "code_uid": "7956bc4c65a48358e90bccdd9bd52207",
+    "prob_desc_memory_limit": "256 megabytes",
+    "prob_desc_sample_inputs": "[\"saba\\n2\", \"saddastavvat\\n2\"]",
+    "exec_outcome": "PASSED",
+    "source_code": "st = str(raw_input())\nn = int(raw_input())\nsize = len(st)/n\ndef is_palindrome(seq):\n    return seq == seq[::-1]\nif n <= len(st):\n cnt = 0\n for i in range(0,len(st),size):\n    if  is_palindrome(st[i:size+i].lower()):\n        cnt += 1\n    else:\n        cnt -=1\n\n if cnt == n:\n    print \"YES\"\n else:\n    print \"NO\"\nelse:\n    print \"NO\"",
+    "prob_desc_created_at": "1432658100",
+    "tags": [
+        "implementation",
+        "brute force",
+        "strings"
+    ],
+    "hidden_unit_tests": ""
+}

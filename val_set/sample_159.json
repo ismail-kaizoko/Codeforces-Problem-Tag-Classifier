@@ -1,0 +1,27 @@
+{
+    "prob_desc_time_limit": "5 seconds",
+    "prob_desc_sample_outputs": "[\"OK\\nOK\\nabacaba1\\nOK\", \"OK\\nfirst1\\nOK\\nsecond1\\nOK\\nthird1\"]",
+    "src_uid": "24098df9c12d9704391949c9ff529c98",
+    "prob_desc_notes": null,
+    "prob_desc_description": "A new e-mail service \"Berlandesk\" is going to be opened in Berland in the near future. The site administration wants to launch their project as soon as possible, that's why they ask you to help. You're suggested to implement the prototype of site registration system. The system should work on the following principle. Each time a new user wants to register, he sends to the system a request with his name. If such a name does not exist in the system database, it is inserted into the database, and the user gets the response OK, confirming the successful registration. If the name already exists in the system database, the system makes up a new user name, sends it to the user as a prompt and also inserts the prompt into the database. The new name is formed by the following rule. Numbers, starting with 1, are appended one after another to name (name1, name2, ...), among these numbers the least i is found so that namei does not yet exist in the database.",
+    "prob_desc_output_spec": "Print n lines, which are system responses to the requests: OK in case of successful registration, or a prompt with a new name, if the requested name is already taken.",
+    "prob_desc_input_spec": "The first line contains number n (1 ≤ n ≤ 105). The following n lines contain the requests to the system. Each request is a non-empty line, and consists of not more than 32 characters, which are all lowercase Latin letters.",
+    "prob_desc_output_to": "standard output",
+    "prob_desc_input_from": "standard input",
+    "lang": "PyPy 3",
+    "lang_cluster": "Python",
+    "difficulty": 1300,
+    "file_name": "train_000.jsonl",
+    "code_uid": "88d77d7e6c55eb4c36aeace7e1fa3b6f",
+    "prob_desc_memory_limit": "64 megabytes",
+    "prob_desc_sample_inputs": "[\"4\\nabacaba\\nacaba\\nabacaba\\nacab\", \"6\\nfirst\\nfirst\\nsecond\\nsecond\\nthird\\nthird\"]",
+    "exec_outcome": "PASSED",
+    "source_code": "d = dict()\nfor _ in range(int(input())):\n    s = input()\n    d[s] = d.get(s, -1) + 1\n    if d[s] == 0:\n        print('OK')\n    else:\n        print(s,d[s],sep='')",
+    "prob_desc_created_at": "1268395200",
+    "tags": [
+        "data structures",
+        "implementation",
+        "hashing"
+    ],
+    "hidden_unit_tests": ""
+}

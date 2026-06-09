@@ -1,0 +1,28 @@
+{
+    "prob_desc_time_limit": "1.5 seconds",
+    "prob_desc_sample_outputs": "[\"9\\n3\\n2 3 1\", \"2\\n2\\n2 1\"]",
+    "src_uid": "fa867bb7df94cc0edc03bcbf975de001",
+    "prob_desc_notes": null,
+    "prob_desc_description": "Little Janet likes playing with cubes. Actually, she likes to play with anything whatsoever, cubes or tesseracts, as long as they are multicolored. Each cube is described by two parameters — color ci and size si. A Zebra Tower is a tower that consists of cubes of exactly two colors. Besides, the colors of the cubes in the tower must alternate (colors of adjacent cubes must differ). The Zebra Tower should have at least two cubes. There are no other limitations. The figure below shows an example of a Zebra Tower.  A Zebra Tower's height is the sum of sizes of all cubes that form the tower. Help little Janet build the Zebra Tower of the maximum possible height, using the available cubes.",
+    "prob_desc_output_spec": "Print the description of the Zebra Tower of the maximum height in the following form. In the first line print the tower's height, in the second line print the number of cubes that form the tower, and in the third line print the space-separated indices of cubes in the order in which they follow in the tower from the bottom to the top. Assume that the cubes are numbered from 1 to n in the order in which they were given in the input. If there are several existing Zebra Towers with maximum heights, it is allowed to print any of them.  Please do not use the %lld specificator to read or write 64-bit integers in С++. It is preferred to use the cin, cout streams or the %I64d specificator.",
+    "prob_desc_input_spec": "The first line contains an integer n (2 ≤ n ≤ 105) — the number of cubes. Next n lines contain the descriptions of the cubes, one description per line. A cube description consists of two space-separated integers ci and si (1 ≤ ci, si ≤ 109) — the i-th cube's color and size, correspondingly. It is guaranteed that there are at least two cubes of different colors.",
+    "prob_desc_output_to": "standard output",
+    "prob_desc_input_from": "standard input",
+    "lang": "Python 2",
+    "lang_cluster": "Python",
+    "difficulty": 1700,
+    "file_name": "train_025.jsonl",
+    "code_uid": "19e857926183acd69711c89843650506",
+    "prob_desc_memory_limit": "256 megabytes",
+    "prob_desc_sample_inputs": "[\"4\\n1 2\\n1 3\\n2 4\\n3 3\", \"2\\n1 1\\n2 1\"]",
+    "exec_outcome": "PASSED",
+    "source_code": "n=input()\ncubes={}\nfor i in range(n):\n  c,s=map(int,raw_input().split())\n  if c not in cubes:cubes[c]=[(0,0)]\n  cubes[c].append([s,i+1])\nfor v in cubes.values():\n  v.sort()\n  v.reverse()\n  for i in range(1,len(v)):v[i][0]+=v[i-1][0]\np=[-1]*(n+10)\nt,c1,k1,c2,k2=0,0,0,0,0\nfor c,v in cubes.items():\n  for i in range(1,len(v)):\n    for j in range(max(1,i-1),i+2):\n      if p[j]>=0 and cubes[p[j]][j][0]+v[i][0]>t:\n        t,c1,k1,c2,k2=cubes[p[j]][j][0]+v[i][0],p[j],j,c,i\n  for i in range(1,len(v)):\n    if p[i]<0 or v[i][0]>cubes[p[i]][i][0]:p[i]=c\nprint t\nprint k1+k2\nif k1<k2:c1,k1,c2,k2=c2,k2,c1,k1\na=[0]*(k1+k2)\nfor i in range(k1):a[i*2]=cubes[c1][i+1][1]\nfor i in range(k2):a[i*2+1]=cubes[c2][i+1][1]\nprint ' '.join(map(str,a))\n",
+    "prob_desc_created_at": "1331280000",
+    "tags": [
+        "data structures",
+        "sortings",
+        "*special",
+        "greedy"
+    ],
+    "hidden_unit_tests": ""
+}

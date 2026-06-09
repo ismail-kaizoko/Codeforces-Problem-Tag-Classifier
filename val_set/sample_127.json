@@ -1,0 +1,28 @@
+{
+    "prob_desc_time_limit": "2 seconds",
+    "prob_desc_sample_outputs": "[\"3\\n3\\n4\\n4\\n0\\n0\\n4\"]",
+    "src_uid": "6cb06a02077750327602a1a7eeac770f",
+    "prob_desc_notes": "NoteConsider the example test:In the first test case, the substring 123 can be used.In the second test case, the substring 213 can be used.In the third test case, the substring 1223 can be used.In the fourth test case, the substring 3221 can be used.In the fifth test case, there is no character 3 in $$$s$$$.In the sixth test case, there is no character 1 in $$$s$$$.In the seventh test case, the substring 3112 can be used.",
+    "prob_desc_description": "You are given a string $$$s$$$ such that each its character is either 1, 2, or 3. You have to choose the shortest contiguous substring of $$$s$$$ such that it contains each of these three characters at least once.A contiguous substring of string $$$s$$$ is a string that can be obtained from $$$s$$$ by removing some (possibly zero) characters from the beginning of $$$s$$$ and some (possibly zero) characters from the end of $$$s$$$.",
+    "prob_desc_output_spec": "For each test case, print one integer — the length of the shortest contiguous substring of $$$s$$$ containing all three types of characters at least once. If there is no such substring, print $$$0$$$ instead.",
+    "prob_desc_input_spec": "The first line contains one integer $$$t$$$ ($$$1 \\le t \\le 20000$$$) — the number of test cases. Each test case consists of one line containing the string $$$s$$$ ($$$1 \\le |s| \\le 200000$$$). It is guaranteed that each character of $$$s$$$ is either 1, 2, or 3. The sum of lengths of all strings in all test cases does not exceed $$$200000$$$.",
+    "prob_desc_output_to": "standard output",
+    "prob_desc_input_from": "standard input",
+    "lang": "PyPy 3",
+    "lang_cluster": "Python",
+    "difficulty": 1200,
+    "file_name": "train_000.jsonl",
+    "code_uid": "303c8dc84d5c0e26afad1fe907c20820",
+    "prob_desc_memory_limit": "256 megabytes",
+    "prob_desc_sample_inputs": "[\"7\\n123\\n12222133333332\\n112233\\n332211\\n12121212\\n333333\\n31121\"]",
+    "exec_outcome": "PASSED",
+    "source_code": "from collections import defaultdict\n\ndef findLen(s):\n    N = len(s)\n    def checkFor(size):\n        left, right = 0, size-1\n        c = defaultdict(int)\n        for i in range(left, right+1):\n            c[s[i]] += 1\n        \n        while right < N-1:\n            if c[\"1\"]>0 and c[\"2\"]>0 and c[\"3\"]>0: return True\n            c[s[left]] -= 1\n            left += 1\n            right += 1\n            c[s[right]] += 1\n        \n        if c[\"1\"]>0 and c[\"2\"]>0 and c[\"3\"]>0: return True\n        else: return False \n\n    left, right = 0, N\n    while left < right:\n        mid = (left+right)//2\n        if checkFor(mid):\n            right = mid\n        else:\n            left = mid + 1\n    \n    if left <N or left==N and checkFor(N): return left\n\n    else: return 0        \n\nt = int(input())\nfor i in range(t):\n    s = input()\n    print(findLen(s))",
+    "prob_desc_created_at": "1589707200",
+    "tags": [
+        "dp",
+        "two pointers",
+        "implementation",
+        "binary search"
+    ],
+    "hidden_unit_tests": ""
+}

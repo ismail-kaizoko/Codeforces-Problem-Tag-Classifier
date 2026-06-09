@@ -1,0 +1,25 @@
+{
+    "prob_desc_time_limit": "2 seconds",
+    "prob_desc_sample_outputs": "[\"pair&lt;pair&lt;int,int&gt;,int&gt;\", \"Error occurred\"]",
+    "src_uid": "6587be85c64a0d5fb66eec0c5957cb62",
+    "prob_desc_notes": null,
+    "prob_desc_description": "Vasya used to be an accountant before the war began and he is one of the few who knows how to operate a computer, so he was assigned as the programmer.We all know that programs often store sets of integers. For example, if we have a problem about a weighted directed graph, its edge can be represented by three integers: the number of the starting vertex, the number of the final vertex and the edge's weight. So, as Vasya was trying to represent characteristics of a recently invented robot in his program, he faced the following problem.Vasya is not a programmer, so he asked his friend Gena, what the convenient way to store n integers is. Gena used to code in language X-- and so he can use only the types that occur in this language. Let's define, what a \"type\" is in language X--:  First, a type is a string \"int\".  Second, a type is a string that starts with \"pair\", then followed by angle brackets listing exactly two comma-separated other types of language X--. This record contains no spaces.  No other strings can be regarded as types. More formally: type := int | pair&lt;type,type&gt;. For example, Gena uses the following type for graph edges: pair&lt;int,pair&lt;int,int&gt;&gt;.Gena was pleased to help Vasya, he dictated to Vasya a type of language X--, that stores n integers. Unfortunately, Gena was in a hurry, so he omitted the punctuation. Now Gena has already left and Vasya can't find the correct punctuation, resulting in a type of language X--, however hard he tries.Help Vasya and add the punctuation marks so as to receive the valid type of language X--. Otherwise say that the task is impossible to perform.",
+    "prob_desc_output_spec": "If it is possible to add the punctuation marks so as to get a correct type of language X-- as a result, print a single line that represents the resulting type. Otherwise, print \"Error occurred\" (without the quotes). Inside the record of a type should not be any extra spaces and other characters.  It is guaranteed that if such type exists, then it is unique. Note that you should print the type dictated by Gena (if such type exists) and not any type that can contain n values.",
+    "prob_desc_input_spec": "The first line contains a single integer n (1 ≤ n ≤ 105), showing how many numbers the type dictated by Gena contains. The second line contains space-separated words, said by Gena. Each of them is either \"pair\" or \"int\" (without the quotes). It is guaranteed that the total number of words does not exceed 105 and that among all the words that Gena said, there are exactly n words \"int\".",
+    "prob_desc_output_to": "standard output",
+    "prob_desc_input_from": "standard input",
+    "lang": "Python 3",
+    "lang_cluster": "Python",
+    "difficulty": 1500,
+    "file_name": "train_041.jsonl",
+    "code_uid": "6ccbdebd2b4652ed88bc41b46f05aea1",
+    "prob_desc_memory_limit": "256 megabytes",
+    "prob_desc_sample_inputs": "[\"3\\npair pair int int int\", \"1\\npair int\"]",
+    "exec_outcome": "PASSED",
+    "source_code": "import sys\nsys.stdin.readline()\nans=''\nstk=[1]\nfor word in sys.stdin.readline().strip().split(' '):\n\tif not stk:\n\t\tstk=1\n\t\tbreak\n\tstk[-1]-=1\n\tans+=','+word\n\tif word[0]=='p':\n\t\tstk.append(2)\n\t\tans+='<'\n\twhile stk and stk[-1]==0:\n\t\tstk.pop()\n\t\tans+='>'\nif stk:\n\tprint('Error occurred')\nelse:\n\tprint(ans.replace('<,','<')[1:-1])",
+    "prob_desc_created_at": "1337182200",
+    "tags": [
+        "dfs and similar"
+    ],
+    "hidden_unit_tests": ""
+}
