@@ -27,40 +27,43 @@ DATA_DIR         = Path(__file__).parent.parent / "code_classification_dataset"
 
 OUT_FILE = "label_index.json"
 
+if Path(OUT_FILE).exists():
+    print("File exists")
+else:
 
-label_to_files = defaultdict(set)  # tag -> set of filenames
-others = set()                     # files with no chosen tag at all
+    label_to_files = defaultdict(set)  # tag -> set of filenames
+    others = set()                     # files with no chosen tag at all
 
-for fname in sorted(os.listdir(DATA_DIR)):
-    if not fname.endswith(".json"):
-        continue
-    path = os.path.join(DATA_DIR, fname)
-    with open(path, "r", encoding="utf-8") as f:
-        rec = json.load(f)
+    for fname in sorted(os.listdir(DATA_DIR)):
+        if not fname.endswith(".json"):
+            continue
+        path = os.path.join(DATA_DIR, fname)
+        with open(path, "r", encoding="utf-8") as f:
+            rec = json.load(f)
 
-    tags = rec.get("tags", [])
-    matched = [t for t in tags if t in CHOSEN_LABELS]
+        tags = rec.get("tags", [])
+        matched = [t for t in tags if t in CHOSEN_LABELS]
 
-    if matched:
-        for tag in matched:
-            label_to_files[tag].add(fname)
-    else:
-        others.add(fname)
+        if matched:
+            for tag in matched:
+                label_to_files[tag].add(fname)
+        else:
+            others.add(fname)
 
-# Build final structure
-index = {}
-for label in CHOSEN_LABELS:
-    files = sorted(label_to_files[label])
-    index[label] = {"files": files, "count": len(files)}
+    # Build final structure
+    index = {}
+    for label in CHOSEN_LABELS:
+        files = sorted(label_to_files[label])
+        index[label] = {"files": files, "count": len(files)}
 
-index["others"] = {"files": sorted(others), "count": len(others)}
+    index["others"] = {"files": sorted(others), "count": len(others)}
 
-with open(OUT_FILE, "w") as f:
-    json.dump(index, f, indent=2)
+    with open(OUT_FILE, "w") as f:
+        json.dump(index, f, indent=2)
 
-print(f"Saved → {OUT_FILE}\n")
-for label, info in index.items():
-    print(f"  {label:<20} {info['count']} files")
+    print(f"Saved → {OUT_FILE}\n")
+    for label, info in index.items():
+        print(f"  {label:<20} {info['count']} files")
 
 
 LABEL_INDEX_PATH = Path(__file__).parent / OUT_FILE

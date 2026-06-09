@@ -15,7 +15,7 @@ FOLDER_PATH     = "best_model_All"
 MODEL_PATH      = FOLDER_PATH+"/"+"model.pkl"
 VECTORIZER_PATH = FOLDER_PATH+"/"+"vectorizer.pkl"
 THRESHOLDS_PATH = FOLDER_PATH+"/"+"thresholds.json"
-TEXT_FIELD      = "prob_desc_notes"
+TEXT_FIELD      = "prob_desc_description"
 
 # ── LOAD SHARED RESOURCES ─────────────────────────────────────────────────────
 
