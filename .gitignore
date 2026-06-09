@@ -1,6 +1,7 @@
 **/__pycache__/**
 .venv
-.claude
 
 mine/embeddings_deberta/
 mine/embeddings_roberta/
+
+code_classification_dataset/
